@@ -1,0 +1,39 @@
+
+j:\android2\testapp>call clear 
+
+j:\android2\testapp>del src\com\example\testapp\R.java 
+
+j:\android2\testapp>del *.keystore 
+
+j:\android2\testapp>del /s /f /q bin\*.* 
+
+j:\android2\testapp>rmdir /s /q obj 
+
+j:\android2\testapp>md obj 
+
+j:\android2\testapp>set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_192 
+
+j:\android2\testapp>set ANDROID_HOME=C:\Users\Maick7\AppData\Local\Android\android-sdk 
+
+j:\android2\testapp>set DEV_HOME=j:\android2\testapp 
+
+j:\android2\testapp>set AAPT_PATH=C:\Users\Maick7\AppData\Local\Android\android-sdk/build-tools/28.0.3/aapt.exe 
+
+j:\android2\testapp>set DX_PATH=C:\Users\Maick7\AppData\Local\Android\android-sdk/build-tools/28.0.3/dx.bat 
+
+j:\android2\testapp>set ANDROID_JAR=C:\Users\Maick7\AppData\Local\Android\android-sdk/platforms/android-24/android.jar 
+
+j:\android2\testapp>set ADB=C:\Users\Maick7\AppData\Local\Android\android-sdk/platform-tools/adb.exe 
+
+j:\android2\testapp>set PACKAGE_PATH=com/example/testapp 
+
+j:\android2\testapp>set PACKAGE=com.example.testapp 
+
+j:\android2\testapp>set MAIN_CLASS=MainActivity 
+
+j:\android2\testapp>REM create R.java 
+
+j:\android2\testapp>call C:\Users\Maick7\AppData\Local\Android\android-sdk/build-tools/28.0.3/aapt.exe package -f -m -S j:\android2\testapp/res -J j:\android2\testapp/src -M j:\android2\testapp/AndroidManifest.xml -I C:\Users\Maick7\AppData\Local\Android\android-sdk/platforms/android-24/android.jar 
+
+j:\android2\testapp>pause
+Для продолжения нажмите любую клавишу . . . 
