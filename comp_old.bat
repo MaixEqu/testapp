@@ -38,3 +38,4 @@ call %ADB% install %DEV_HOME%/bin/AndroidTest.signed.apk
 call %ADB% shell am start -n %PACKAGE%/%PACKAGE%.%MAIN_CLASS%
 pause
 
+# 03

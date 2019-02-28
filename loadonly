@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export ANDROID_HOME=/home/maick/Android/Sdk
+export ADB=$ANDROID_HOME/platform-tools/adb
+export PACKAGE=com.example.testapp
+export MAIN_CLASS=MainActivity
+
+# REM reinstall and start APK on device
+export DEV_HOME=`pwd`
+$ADB uninstall $PACKAGE
+$ADB install $DEV_HOME/bin/AndroidTest.signed.apk
+$ADB shell am start -n $PACKAGE/$PACKAGE.$MAIN_CLASS
+read -p 'Must be run on the device.   Press [Enter] key to continue...'
+

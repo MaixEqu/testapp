@@ -9,7 +9,7 @@
 rm src/com/example/testapp/R.java
 rm *.keystore
 rm bin/*
-#read -p 'clean done.   Press [Enter] key to continue...'
+read -p 'clean done.   Press [Enter] key to continue...'
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export ANDROID_HOME=/home/maick/Android/Sdk
@@ -17,7 +17,6 @@ export DEV_HOME=`pwd`
 
 export JACK_JAR=$ANDROID_HOME/build-tools/27.0.3/jack.jar
 export AAPT_PATH=$ANDROID_HOME/build-tools/27.0.3/aapt
-export DX_PATH=$ANDROID_HOME/build-tools/27.0.3/dx
 export ANDROID_JAR=$ANDROID_HOME/platforms/android-21/android.jar
 export ADB=$ANDROID_HOME/platform-tools/adb
 export JAVAVM=$JAVA_HOME/bin/java
@@ -26,35 +25,26 @@ export PACKAGE_PATH=com/example/testapp
 export PACKAGE=com.example.testapp
 export MAIN_CLASS=MainActivity
 
-echo 'creating R.java...'
+# REM create R.java
 $AAPT_PATH package -f -m -S $DEV_HOME/res -J $DEV_HOME/src -M $DEV_HOME/AndroidManifest.xml -I $ANDROID_JAR
-#read -p 'Must be created "R.java".   Press [Enter] key to continue...'
+read -p 'Must be created "R.java".   Press [Enter] key to continue...'
 
-echo 'running Jack ToolChain...'
+# REM run Jack ToolChain
 $JAVAVM -jar $JACK_JAR --output-dex $DEV_HOME/bin -cp $ANDROID_JAR -D jack.java.source.version=1.8 $DEV_HOME/src/com/example/testapp/R.java $DEV_HOME/src/com/example/testapp/MainActivity.java
-#read -p '"Jack ToolChain" done.   Press [Enter] key to continue...'
-echo 'Jack ToolChain done'
-
-##   echo 'compile *.java -> *.class'
-##   $JAVA_HOME/bin/javac -d $DEV_HOME/obj -cp $ANDROID_JAR -sourcepath $DEV_HOME/src $DEV_HOME/src/$PACKAGE_PATH/*.java
-##   read -p 'Must be created java classes.   Press [Enter] key to continue...'
-##   
-##   echo 'compile *.class -> *.dex'
-##   $DX_PATH --dex --output=$DEV_HOME/bin/classes.dex $DEV_HOME/obj
-##   read -p 'Must be created "classes.dex" file.   Press [Enter] key to continue...'
-  
-echo 'creating UNSIGNED apk'
+read -p '"Jack ToolChain" done.   Press [Enter] key to continue...'
+ 
+# REM create UNSIGNED apk
 $AAPT_PATH package -f -M $DEV_HOME/AndroidManifest.xml -S $DEV_HOME/res -I $ANDROID_JAR -F $DEV_HOME/bin/AndroidTest.unsigned.apk $DEV_HOME/bin
-#read -p 'Must be created UNSIGNED apk.   Press [Enter] key to continue...'
-
-echo 'creating SIGNED apk'
+read -p 'Must be created UNSIGNED apk.   Press [Enter] key to continue...'
+# 
+# REM create key and SIGNED APK
 $JAVA_HOME/bin/keytool -genkey -validity 10000 -dname "CN=AndroidDebug, O=Android, C=US" -keystore $DEV_HOME/AndroidTest.keystore -storepass android -keypass android -alias androiddebugkey -keyalg RSA -keysize 2048
 $JAVA_HOME/bin/jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore $DEV_HOME/AndroidTest.keystore -storepass android -keypass android -signedjar $DEV_HOME/bin/AndroidTest.signed.apk $DEV_HOME/bin/AndroidTest.unsigned.apk androiddebugkey
-#read -p 'Must be created SIGNED apk.   Press [Enter] key to continue...'
+read -p 'Must be created SIGNED apk.   Press [Enter] key to continue...'
 
-echo 'reinstall and start APK on device'
+# REM reinstall and start APK on device
 $ADB uninstall $PACKAGE
 $ADB install $DEV_HOME/bin/AndroidTest.signed.apk
 $ADB shell am start -n $PACKAGE/$PACKAGE.$MAIN_CLASS
-#read -p 'Must be run on device.   (press [Enter] key to continue...)'
+read -p 'Must be run on the device.   Press [Enter] key to continue...'
 

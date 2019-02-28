@@ -36,4 +36,5 @@ j:\android2\testapp>REM create R.java
 j:\android2\testapp>call C:\Users\Maick7\AppData\Local\Android\android-sdk/build-tools/28.0.3/aapt.exe package -f -m -S j:\android2\testapp/res -J j:\android2\testapp/src -M j:\android2\testapp/AndroidManifest.xml -I C:\Users\Maick7\AppData\Local\Android\android-sdk/platforms/android-24/android.jar 
 
 j:\android2\testapp>pause
-Для продолжения нажмите любую клавишу . . . 
+
+04
