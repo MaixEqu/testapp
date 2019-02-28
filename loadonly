@@ -10,5 +10,5 @@ export DEV_HOME=`pwd`
 $ADB uninstall $PACKAGE
 $ADB install $DEV_HOME/bin/AndroidTest.signed.apk
 $ADB shell am start -n $PACKAGE/$PACKAGE.$MAIN_CLASS
-read -p 'Must be run on the device.   Press [Enter] key to continue...'
+# read -p 'Must be run on the device.   Press [Enter] key to continue...'
 
